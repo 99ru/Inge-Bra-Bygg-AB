@@ -1,0 +1,24 @@
+{
+  "name": "inge-bra-bygg-ab",
+  "version": "1.0.0",
+  "description": "![poster](./poster.png)\r # Inge Bra Bygg AB\r **Ärende och kommunikationsplattform mellan byggare och kunder för byggfirman Inge Bra Bygg AB.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/99ru/Inge-Bra-Bygg-AB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/99ru/Inge-Bra-Bygg-AB/issues"
+  },
+  "homepage": "https://github.com/99ru/Inge-Bra-Bygg-AB#readme",
+  "dependencies": {
+    "express": "^4.18.0",
+    "mongoose": "^6.3.1"
+  }
+}
