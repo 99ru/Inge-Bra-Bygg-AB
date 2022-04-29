@@ -2,6 +2,7 @@ const db = require('../database/connection');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {InvalidCredentials, TokenExpired, Unauthorized} = require('../errors');
 
 require('dotenv').config();
 
@@ -34,17 +35,37 @@ User.authenticate = async (email, password) => {
     const user = await User.findOne({ where: { email}
     });
 
-    if (user) {
-        if (bcrypt.compareSync(password, user.password)) {
-            const token = jwt.sign({ id: user.id }, process.env.SECRET, {
-                expiresIn: 86400,
-            });
-            return {
-                user,
-                token,
-            };
+    if(!user){ throw new InvalidCredentials(); }
+
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+    if(passwordMatch){
+        const payload = {
+            id: user.id,
+            email: user.email,
+            role: user.role
+        };
+        return jwt.sign(payload, process.env.SECRET, { expiresIn: '1d' });
+    }else {
+        throw new InvalidCredentials();
+    }
+}
+
+User.validateToken = (token) => {
+    try {
+        return jwt.verify(token, process.env.SECRET);
+    }catch(err){
+        if(err instanceof jwt.TokenExpiredError){
+            throw new TokenExpired();
+        }else if (err instanceof jwt.JsonWebTokenError){
+            throw new Unauthorized();
+        }else {
+            throw err;
         }
     }
-    return null;
 }
+
+module.exports = User;
+
+
+
     
