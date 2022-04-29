@@ -4,6 +4,8 @@
   "description": "![poster](./poster.png)\r # Inge Bra Bygg AB\r **Ärende och kommunikationsplattform mellan byggare och kunder för byggfirman Inge Bra Bygg AB.**",
   "main": "index.js",
   "scripts": {
+    "setup": "node database/setup.js",
+    "seed": "node database/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
