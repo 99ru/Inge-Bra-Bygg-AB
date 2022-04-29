@@ -7,6 +7,10 @@ const {InvalidCredentials, TokenExpired, Unauthorized} = require('../errors');
 require('dotenv').config();
 
 const User = db.define('User', {
+    userName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
