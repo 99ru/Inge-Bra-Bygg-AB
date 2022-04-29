@@ -7,12 +7,17 @@ const Task = db.define("Task", {
     defaultValue: "untitled task",
   },
 
+  adminId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+
   clientId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
 
-  woderId: {
+  workerId: {
     type: DataTypes.NUMBER,
     allowNull: false,
   },
