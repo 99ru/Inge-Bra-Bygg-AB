@@ -5,12 +5,15 @@ const connection = require("./database/connection");
 
 require("dotenv").config();
 
+// middlewares
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(cors());
+app.use(fileUpload()); 
+app.use(express.json()); 
 
 // Routes
-/* app.use */
+
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
