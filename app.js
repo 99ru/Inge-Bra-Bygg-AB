@@ -9,8 +9,8 @@ require("dotenv").config();
 // middlewares
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
-/* app.use(fileUpload());  */ // allows us to upload files
-app.use(express.json()); // allows us to use req.body
+app.use(express.json()); 
+/* app.use(fileUpload()); */ 
 
 // Routes
 

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const AuthController = require('../controllers/AuthController');
 const Validations = require('../validations');
-
+const asyncHandler = require('../utils/asyncHandler');
 
 const router = new Router();
 
