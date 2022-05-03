@@ -7,6 +7,7 @@ const asyncHandler = require("../utils/asyncHandler");
 const router = new Router();
 
 router.get('/', Auth.user, asyncHandler(UserController.allUsers)); 
+router.post('/', Auth.user, asyncHandler(UserController.createUser)); 
 
 
 

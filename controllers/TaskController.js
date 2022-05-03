@@ -2,6 +2,7 @@ const Task = require("../models/Task");
 const User = require("../models/User");
 
 module.exports = {
+
   allTasks: async (req, res) => {
     if (req.user.role === "admin") {
       const tasks = await Task.findAll({});
