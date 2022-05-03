@@ -6,7 +6,7 @@ const asyncHandler = require("../utils/asyncHandler");
 
 const router = new Router();
 
-router.get('/users', Auth.user, asyncHandler(UserController.allUsers)); 
+router.get('/', Auth.user, asyncHandler(UserController.allUsers)); 
 
 
 

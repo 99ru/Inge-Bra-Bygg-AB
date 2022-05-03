@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 8080;
 const routes = require("./routes");
 
 require("dotenv").config();
@@ -12,12 +11,14 @@ app.use(express.json());
 /* app.use(fileUpload()); for later */ 
 
 // Routes
-app.use('/api', routes.auth); // login 
-app.use('/api/users', routes.users); 
+app.use('/', routes.auth); // login                       
+app.use('/users', routes.users); // all users
 
 
 
 
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
-});
+}) 
+
