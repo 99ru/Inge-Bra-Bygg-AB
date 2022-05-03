@@ -14,4 +14,25 @@ module.exports = {
       const tasks = await Task.findAll({ where: { UserId: req.user.id } });
     }
   },
+
+  createTask: async (req, res) => {
+    if (req.user.role === "client") {
+      throw new Error("I dont tink sååååå");
+    } else {
+      const task = await Task.create(req.body);
+      res.json(task);
+    }
+  },
+
+  updateTask: async (req, res) => {
+    const { id } = req.params;
+    const task = await Task.findByPk(id);
+    await task.update(req.body, { where: { id } });
+    res.json(task);
+  },
+
+  /* getTask: async (req, res) => {
+    const task = await Task.findOne({ where: { id: req.params.id } }); 
+    res.json(task);
+  } */
 };
