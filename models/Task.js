@@ -2,6 +2,8 @@ const db = require("../database/connection");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const Task = db.define("Task", {
+  taskId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  
   title: {
     type: DataTypes.STRING,
     defaultValue: "untitled task",

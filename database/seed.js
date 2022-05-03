@@ -26,7 +26,7 @@ const Task = require('../models/Task');
         taskImage: 'Task 1 image',
         adminId: 1,
         clientId: 1,
-        workerId: 1        
+        workerId: 1
     });
 
     })();
