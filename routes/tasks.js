@@ -10,6 +10,7 @@ const router = new Router();
 router.get("/", Auth.user, asyncHandler(TaskController.allTasks));
 router.post("/", Auth.user, asyncHandler(TaskController.createTask));
 router.patch("/:id", Auth.user, asyncHandler(TaskController.updateTask));
+router.delete("/:id", Auth.user, asyncHandler(TaskController.deleteTask));
 
 
 module.exports = router

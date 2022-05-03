@@ -31,8 +31,16 @@ module.exports = {
     res.json(task);
   },
 
-  /* getTask: async (req, res) => {
-    const task = await Task.findOne({ where: { id: req.params.id } }); 
-    res.json(task);
-  } */
+  deleteTask: async (req, res) => {
+    const { id } = req.params;
+    const task = await Task.findByPk(id);
+    if (req.user.role === "admin") {
+      await task.destroy();
+      res.json("task deleted");
+    } else {
+      throw new Error("You are not allowed to delete this task");
+    }
+  },
+
+
 };
