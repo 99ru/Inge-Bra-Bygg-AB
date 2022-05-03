@@ -13,8 +13,7 @@ app.use(express.json());
 // Routes
 app.use('/', routes.auth); // login                       
 app.use('/users', routes.users); // all users
-
-
+app.use('/tasks', routes.tasks); // all tasks
 
 
 const port = process.env.PORT || 8080;

@@ -4,11 +4,8 @@ require('dotenv').config();
 module.exports =  {
     async user(req, res, next) {
         try {
-            console.log("grillkorv")
             const token = req.header('Authorization').replace('Bearer ', '');
-            console.log(token);
             const user = jwt.verify(token, process.env.SECRET);
-            console.log(user)
             req.user = user;
             return next();
         } catch (err) {
