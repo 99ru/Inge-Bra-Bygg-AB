@@ -2,23 +2,31 @@ const db = require("../database/connection");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const Task = db.define("Task", {
-  taskId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  
+
+  taskId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+
   title: {
     type: DataTypes.STRING,
     defaultValue: "untitled task",
   },
+
   description: {
     type: DataTypes.STRING,
     defaultValue: "no description",
   },
+
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: "in progress",
+  },
+
   taskImage: {
     type: DataTypes.STRING,
     defaultValue: "no image",
-  },
-  adminId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
   },
 
   clientId: {
@@ -29,11 +37,11 @@ const Task = db.define("Task", {
   workerId: {
     type: DataTypes.NUMBER,
     allowNull: false,
-  },
-  TimeStamps: {
+  }
+  /*  TimeStamps: {
     type: DataTypes.DATE,
     defaultValue: Sequelize.NOW,
-  },
+  }, */
 });
 
 module.exports = Task;

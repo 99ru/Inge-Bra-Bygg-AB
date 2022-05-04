@@ -6,11 +6,12 @@ const asyncHandler = require("../utils/asyncHandler");
 
 const router = new Router();
 
-// routes
+// tasks
 router.get("/", Auth.user, asyncHandler(TaskController.allTasks));
 router.post("/", Auth.user, asyncHandler(TaskController.createTask));
 router.patch("/:id", Auth.user, asyncHandler(TaskController.updateTask));
 router.delete("/:id", Auth.user, asyncHandler(TaskController.deleteTask));
+router.post("/:id/msg", Auth.user, asyncHandler(TaskController.sendMsg));
 
 
 module.exports = router

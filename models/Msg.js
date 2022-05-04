@@ -2,7 +2,12 @@ const db = require("../database/connection");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const Msg = db.define("Msg", { 
-  msg: { 
+  msgId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  messageInput: { 
     type: DataTypes.STRING,
     defaultValue: "no message yet",
   },

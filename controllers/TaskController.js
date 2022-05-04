@@ -1,8 +1,8 @@
 const Task = require("../models/Task");
 const User = require("../models/User");
+const Msg = require("../models/Msg");
 
 module.exports = {
-
   allTasks: async (req, res) => {
     if (req.user.role === "admin") {
       const tasks = await Task.findAll({});
@@ -18,11 +18,25 @@ module.exports = {
 
   createTask: async (req, res) => {
     if (req.user.role === "client") {
-      throw new Error("I dont tink sååååå");
+      throw new Error("you dont have permission to create a task");
     } else {
       const task = await Task.create(req.body);
       res.json(task);
+      console.log("task created");
     }
+  },
+
+  sendMsg: async (req, res) => {
+    const { id } = req.params
+    const task = await Task.findByPk(id)
+    const messageInput = req.body.messageInput
+    const userId = req.user.id
+
+    if(req.user.role == 'client' && task.clientId != userId) { throw new Error('You dont have permission') }
+    if(req.user.role == 'worker' && task.workerId != userId) { throw new Error('You dont have permission') }
+    
+    const message = await Msg.create({ messageInput, userId, taskId: id })
+    res.json('Message created successfully: ' + message.messageInput)
   },
 
   updateTask: async (req, res) => {
@@ -39,11 +53,7 @@ module.exports = {
       await task.destroy();
       res.json("task deleted");
     } else {
-      throw new Error("You are not allowed to delete this task");
+      throw new Error("You dont have permission to delete this task");
     }
   },
-
-
-
-
 };

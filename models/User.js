@@ -7,7 +7,13 @@ const { InvalidCredentials, TokenExpired, Unauthorized } = require("../errors");
 require("dotenv").config();
 
 const User = db.define("User", {
-  userId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+
+  userId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+
   userName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -46,7 +52,7 @@ User.authenticate = async (email, password) => {
   const passwordMatch = bcrypt.compareSync(password, user.password);
   if (passwordMatch) {
     const payload = {
-      id: user.id,
+      id: user.userId, // ändrat från user.id
       email: user.email,
       role: user.role,
     };
