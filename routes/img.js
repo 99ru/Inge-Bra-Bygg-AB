@@ -1,8 +1,14 @@
-const { Router } = require('express');
-const ImgController = require('../controllers/ImgController');
-/* const fileUpload = require('express-fileupload'); */
-const router = new Router();
-const Auth = require('../middlewares/auth'); 
+const {Router} = require('express')
+const Auth = require('../middlewares/auth')
+const ImageController = require('../controllers/ImgController')
+const router = new Router()
+const fileUpload = require('express-fileupload')
 
-// get all images from public/images (only for admin)
-router.get('/', Auth.admin, ImgController.getImages);
+router.get('/', Auth.admin, ImageController.getAll)
+router.post('/', 
+  Auth.admin, 
+  fileUpload({useTempFiles:true}),
+  ImageController.upload
+)
+
+module.exports = router

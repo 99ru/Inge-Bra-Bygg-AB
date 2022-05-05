@@ -2,6 +2,7 @@ const Users = require("../models/User");
 const Tasks = require("../models/Task");
 
 module.exports = {
+
   allUsers: async (req, res) => {
     if (req.user.role === "admin") {
       const users = await Users.findAll({
@@ -22,4 +23,5 @@ module.exports = {
       throw new Error("You are not allowed to create new users");
     }
   },
+  
 };

@@ -16,7 +16,8 @@ app.use('/', routes.auth);
 app.use('/users', routes.users); 
 app.use('/tasks', routes.tasks); 
 app.use('/tasks/:id/msg', routes.tasks); 
-app.use('/tasks/:id/img', routes.tasks); 
+app.use('/img', routes.img);
+/* app.use('/tasks/:id/img', routes.tasks);  */
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {

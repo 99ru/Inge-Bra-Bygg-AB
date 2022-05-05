@@ -33,12 +33,11 @@ module.exports = {
     const messageInput = req.body.messageInput;
     const userId = req.user.id;
 
+    // must add error handling for client user
+
     if (!userId) {
       throw new Error("you need to be logged in to send a message");
     }
-
-    /*    if(req.user.role == 'client' && task.clientId != userId) { throw new Error('You dont have permission') }
-    if(req.user.role == 'worker' && task.workerId != userId) { throw new Error('You dont have permission') } */
 
     const message = await Msg.create({ messageInput, userId, taskId: id });
     res.json("Message created successfully: " + message.messageInput);
