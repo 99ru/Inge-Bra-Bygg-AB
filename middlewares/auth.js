@@ -25,6 +25,7 @@ module.exports =  {
         } catch (error) {
             res.status(401).send({ error: 'Token is invalid' });
         }
-    }
+    },
+    // kanske lägga till en för worker också? 
 }
 

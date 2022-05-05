@@ -8,11 +8,12 @@ module.exports = {
       const tasks = await Task.findAll({});
       res.json(tasks);
     } else if (req.user.role === "worker") {
-      const tasks = await Task.findAll({ where: { UserId: req.user.id } });
+      const tasks = await Task.findAll({ where: { workerId: req.user.id } });
       res.json(tasks);
+    } else if (req.user.role === "client") {
+      const tasks = await Task.findAll({ where: { clientId: req.user.id } });
     } else {
-      req.user.role === "client";
-      const tasks = await Task.findAll({ where: { UserId: req.user.id } });
+      throw new Error("something went wrong!");
     }
   },
 
@@ -27,16 +28,20 @@ module.exports = {
   },
 
   sendMsg: async (req, res) => {
-    const { id } = req.params
-    const task = await Task.findByPk(id)
-    const messageInput = req.body.messageInput
-    const userId = req.user.id
+    const { id } = req.params;
+    const task = await Task.findByPk(id);
+    const messageInput = req.body.messageInput;
+    const userId = req.user.id;
 
-    if(req.user.role == 'client' && task.clientId != userId) { throw new Error('You dont have permission') }
-    if(req.user.role == 'worker' && task.workerId != userId) { throw new Error('You dont have permission') }
-    
-    const message = await Msg.create({ messageInput, userId, taskId: id })
-    res.json('Message created successfully: ' + message.messageInput)
+    if (!userId) {
+      throw new Error("you need to be logged in to send a message");
+    }
+
+    /*    if(req.user.role == 'client' && task.clientId != userId) { throw new Error('You dont have permission') }
+    if(req.user.role == 'worker' && task.workerId != userId) { throw new Error('You dont have permission') } */
+
+    const message = await Msg.create({ messageInput, userId, taskId: id });
+    res.json("Message created successfully: " + message.messageInput);
   },
 
   updateTask: async (req, res) => {
