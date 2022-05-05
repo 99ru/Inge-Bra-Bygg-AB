@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Msg = require("../models/Msg");
 
 module.exports = {
+
   allTasks: async (req, res) => {
     if (req.user.role === "admin") {
       const tasks = await Task.findAll({});
@@ -12,6 +13,7 @@ module.exports = {
       res.json(tasks);
     } else if (req.user.role === "client") {
       const tasks = await Task.findAll({ where: { clientId: req.user.id } });
+       res.json(tasks);
     } else {
       throw new Error("something went wrong!");
     }
@@ -32,19 +34,19 @@ module.exports = {
     const task = await Task.findByPk(id);
     const messageInput = req.body.messageInput;
     const userId = req.user.id;
-
-    // must add error handling for client user
-
-    if (!userId) {
-      throw new Error("you need to be logged in to send a message");
-    }
-
-    const message = await Msg.create({ messageInput, userId, taskId: id });
-    res.json("Message created successfully: " + message.messageInput);
+    if (task.clientId === userId) {
+      const message = await Msg.create({ messageInput, userId, taskId: id });
+      res.json("Message created successfully: " + message.messageInput);
+    } else {
+      throw new Error("you dont have access to this task");
+    }   
   },
 
   updateTask: async (req, res) => {
-    const { id } = req.params;
+    if (req.user.role === "client") {
+      throw new Error("you dont have permission to update a task");
+    }
+    const { id } = req.params; 
     const task = await Task.findByPk(id);
     await task.update(req.body, { where: { id } });
     res.json(task);
