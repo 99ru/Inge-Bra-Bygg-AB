@@ -11,6 +11,10 @@ const Msg = db.define("Msg", {
     type: DataTypes.STRING,
     defaultValue: "no message yet",
   },
+  image: {
+    type: DataTypes.STRING,
+    defaultValue: "no image",
+  },
   taskId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -19,10 +23,10 @@ const Msg = db.define("Msg", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  TimeStamps: {
+ /*  TimeStamps: {
     type: DataTypes.DATE,
     defaultValue: Sequelize.NOW,
-  },
+  }, */
 });
 
 module.exports = Msg;

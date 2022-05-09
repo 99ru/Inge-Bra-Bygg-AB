@@ -24,10 +24,7 @@ const Task = db.define("Task", {
     defaultValue: "in progress",
   },
 
-  taskImage: {
-    type: DataTypes.STRING,
-    defaultValue: "no image",
-  },
+ 
 
   clientId: {
     type: DataTypes.INTEGER,
@@ -38,7 +35,7 @@ const Task = db.define("Task", {
     type: DataTypes.NUMBER,
     allowNull: false,
   }
-  /*  TimeStamps: {
+ /*   TimeStamps: {
     type: DataTypes.DATE,
     defaultValue: Sequelize.NOW,
   }, */
