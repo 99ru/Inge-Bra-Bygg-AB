@@ -10,12 +10,14 @@ const Msg = require('../models/Msg');
         password: 'admin',
         role: 'admin'
     });
+
     await User.create({
         userName: 'worker',
         email: 'worker@worker.se',
         password: 'worker',
         role: 'worker'
     });
+    
     await User.create({
         userName: 'client',
         email: 'client@client.se',
@@ -31,7 +33,8 @@ const Msg = require('../models/Msg');
         taskStatus: 'in progress',
         clientId: 1,
         workerId: 2
-    });
+    }); 
+
     await Task.create({
         title: 'repair the roof',
         description: 'Joakim fell through the roof, we need to fix it',
@@ -40,6 +43,7 @@ const Msg = require('../models/Msg');
         clientId: 2,
         workerId: 2
     });
+
     await Task.create({
         title: 'fix oskars table',
         description: 'Oskar had a insident with his table when he demoted to silver IV, the least we can do is fixing his table',
