@@ -21,21 +21,19 @@ module.exports = {
             .withMessage('Missing password')
     ]),
     createTask: validator([
-        check('taskName').exists()
+        check('title').exists()
             .withMessage('Missing task name'),
-        check('taskDescription').exists()
+        check('description').exists()
             .withMessage('Missing task description'),
-        check('taskStatus').exists()
+        check('status').exists()
             .withMessage('Missing task status'),
-        check('taskImage').exists()
-            .withMessage('Missing task image'),
         check('clientId').exists()
             .withMessage('Missing client id'),
         check('workerId').exists()
             .withMessage('Missing worker id')
     ]),
     updateTask: validator([
-        check('taskStatus').exists()
+        check('status').exists()
             .isIn(['pending', 'in progress', 'completed'])
             .withMessage('Missing task status'),
     ]),
@@ -45,11 +43,11 @@ module.exports = {
     createUser: validator([
         check('userName').exists()
             .withMessage('Missing user name'),
-        check('userEmail').exists()
+        check('email').exists()
             .withMessage('Missing user email'),
-        check('userPassword').exists()
+        check('password').exists()
             .withMessage('Missing user password'),
-        check('userRole').exists()
+        check('role').exists()
             .withMessage('Missing user role'),
     ]),
 }
