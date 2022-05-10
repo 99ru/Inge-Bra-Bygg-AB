@@ -3,7 +3,7 @@ const path = require("path"); // allows us to get the path to a file
 
 module.exports = {
   getAll: async (req, res) => {
-    const images = fs.readdirSync(path.join("public", "images"));
+    const images = fs.readdirSync(path.join("upload", "images"));
     res.json({ images });
   },
 
@@ -13,14 +13,14 @@ module.exports = {
       console.log("Not an image");
     }
 
-    if (fs.existsSync(path.join("public", "images", req.files.image.name))) {
+    if (fs.existsSync(path.join("upload", "images", req.files.image.name))) {
       console.log("File already exists");
       req.files.image.name;
     }
 
     fs.copyFileSync(
       req.files.image.tempFilePath,
-      path.join("public", "images", req.files.image.name)
+      path.join("upload", "images", req.files.image.name)
     );
     res.json({ message: "Image uploaded" });
   },

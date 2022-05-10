@@ -23,5 +23,4 @@ module.exports = {
       throw new Error("You are not allowed to create new users");
     }
   },
-  
 };
