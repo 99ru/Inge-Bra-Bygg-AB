@@ -1,5 +1,6 @@
 const db = require("../database/connection");
 const { Sequelize, Model, DataTypes } = require("sequelize");
+const {TASK_STATUS} = require("../constants");
 
 const Task = db.define("Task", {
 
@@ -21,10 +22,9 @@ const Task = db.define("Task", {
 
   status: {
     type: DataTypes.STRING,
+    enum: TASK_STATUS,
     defaultValue: "in progress",
   },
-
- 
 
   clientId: {
     type: DataTypes.INTEGER,
