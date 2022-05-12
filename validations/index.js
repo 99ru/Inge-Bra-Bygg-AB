@@ -34,7 +34,7 @@ module.exports = {
     ]),
     updateTask: validator([
         check('status').exists()
-            .isIn(['pending', 'in progress', 'completed'])
+            .isIn(['in progress', 'completed', 'cancelled'])
             .withMessage('Missing task status'),
     ]),
 
